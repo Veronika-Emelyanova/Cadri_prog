@@ -4,11 +4,11 @@
         <table class="table table-hover table-bordered">
             <thead>
             <tr class="table-primary">
-                <th scope="col">Фото</th>
-                <th scope="col">Ф.И.О</th>
-                <th scope="col">Должность</th>
-                <th scope="col">Отдел(ы)</th>
-                <th scope="col">Email</th>
+                <th scope="col">{{ __('Фото') }}</th>
+                <th scope="col">{{ __('Ф.И.О') }}</th>
+                <th scope="col">{{ __('Должность') }}</th>
+                <th scope="col">{{ __('Отдел(ы)') }}</th>
+                <th scope="col">{{ __('Email') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -22,18 +22,21 @@
                                  class="rounded-circle border border-primary"
                             >
                         </th>
-                        @if((Auth::user()->post_id) == 1 || (Auth::user()->post_id) == 2)
-                            <td><a href="{{route('user.show', $user->id)}}">{{$user->name}}</a></td>
-                            @else
-                            <td>{{$user->name}}</td>
-                        @endif
+
+                        @role('admin', 'manager')
+                            <td><a href="{{route('users.show', $user->id)}}">{{$user->name}}</a></td>
+                        @endrole
+
+                        @role('user')
+                             <td><b>{{$user->name}}</b></td> 
+                        @endrole
 
                         <th>{{$user->post->name}}</th>
                         <div>
-                            @if($user->otdels)
+                            @if($user->departments)
                                 <th>
-                            @foreach($user->otdels as $otdel)
-                                    {{$otdel->id}}. {{$otdel->name}}<br>
+                            @foreach($user->departments as $department)
+                                    {{$department->id}}. {{$department->name}}<br>
                             @endforeach
                             </th>
                             @else
@@ -45,8 +48,8 @@
                 @endforeach
             </tbody>
         </table>
-        @if((Auth::user()->post_id) == 1 || (Auth::user()->post_id) == 2)
-        <div><a href="{{route('user.create')}}" class="btn btn-primary mt-3">Добавить пользователя</a></div>
-        @endif
+        @role('admin', 'manager')
+        <div><a href="{{route('users.create')}}" class="btn btn-primary mt-3">{{ __('Добавить пользователя') }}</a></div>
+        @endrole
     </div>
 @endsection

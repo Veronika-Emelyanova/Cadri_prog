@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Регистрация') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row mb-3">
@@ -58,15 +58,15 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="otdel_id" class="col-md-4 col-form-label text-md-end">{{ __('Отдел(ы)') }}</label>
+                                <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('Отдел(ы)') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control @error('otdel') is-invalid @enderror" id="otdel_id" name="otdel_id[]" value="{{ old('otdel_id[]') }}" multiple aria-label="multiple select example">
-                                        @foreach($otdels as $otdel)
-                                            <option value="{{$otdel->id}}">{{$otdel->name}}</option>
+                                    <select class="form-control @error('department') is-invalid @enderror" id="department_id" name="department_id[]" value="{{ old('department_id[]') }}" multiple aria-label="multiple select example">
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('otdel')
+                                    @error('department')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -97,15 +97,7 @@
                                     </span>
                                     @enderror
                                 </div>
-
                             </div>
-{{--                            <div class="row mb-3">--}}
-{{--                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

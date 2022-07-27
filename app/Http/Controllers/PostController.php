@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Post;
-use App\Models\User;
+use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
@@ -15,23 +15,22 @@ class PostController extends BaseController
     {
         $this->middleware('auth');
     }
+
     public function index() {
         $posts = Post::all();
-        $users = User::all();
-
- return view('post.index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function create(){
         return view('post.create');
     }
 
-    public function store(){
-        $data = request()->validate([
-            'name' => 'string'
+    public function store(Request $request){
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255']
         ]);
         Post::create($data);
-        return redirect()->route('post.index');
+        return redirect()->route('posts.index');
     }
 
     public function show(Post $post){
@@ -42,9 +41,9 @@ class PostController extends BaseController
         return view('post.edit', compact('post'));
     }
 
-    public function update(Post $post){
-        $data = request()->validate([
-            'name' => 'string'
+    public function update(Request $request, Post $post){
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255']
         ]);
         $post->update($data);
         return redirect()->route('post.show', $post->id);
@@ -52,6 +51,6 @@ class PostController extends BaseController
 
     public function destroy(Post $post) {
         $post->delete();
-        return redirect()->route('post.index');
+        return redirect()->route('posts.index');
     }
 }

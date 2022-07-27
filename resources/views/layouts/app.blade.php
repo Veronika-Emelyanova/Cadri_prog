@@ -27,7 +27,7 @@
 
                 @guest
                     @if (Route::has('login'))
-                        <div>Cadr</div>
+                        <div>{{ __('Cadr') }}</div>
                     @endif
                 @else
                     <nav class="navbar navbar-expand-lg navbar-light">
@@ -35,13 +35,13 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="{{route('otdel.index')}}"><h4>Отделы</h4></a>
+                                        <a class="nav-link " href="{{route('departments.index')}}"><h4>{{ __('Отделы') }}</h4></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="{{route('user.index')}}"><h4>Пользователи</h4></a>
+                                        <a class="nav-link " href="{{route('users.index')}}"><h4>{{ __('Пользователи') }}</h4></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="{{route('post.index')}}" tabindex="-1"><h4>Должности</h4></a>
+                                        <a class="nav-link " href="{{route('posts.index')}}" tabindex="-1"><h4>{{ __('Должности') }}</h4></a>
                                     </li>
                                 </ul>
                             </div>
@@ -52,23 +52,14 @@
                 @endguest
 
 
-
-
-
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
-
                         @else
-
-
                             <li class="nav-item dropdown d-flex flex-row">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -80,10 +71,6 @@
                                      class="rounded-circle"
                                 >
                                 <div>
-{{--                                    {{date}}--}}
-{{--                                    {{--}}
-{{--                                    Carbon::parse('')->locale('ru')->isoFormat('DD.MM.YYYY')--}}
-{{--                                    }}--}}
                                 </div>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

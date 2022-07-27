@@ -2,49 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Otdel;
+use App\Models\Department;
 use App\Models\Post;
-use App\Models\UserOtdel;
-use Carbon\Carbon;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User;
-use App\Http\Requests\ProjectRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
-use function GuzzleHttp\Promise\all;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
-class UserController extends BaseController
+
+class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
     public function index() {
-        //$users = User::all();
         $users = User::all();
-
-        $date = Carbon::parse('')->locale('ru');
-        $date->isoFormat('DD.MM.YYYY');
-
         return view('user.index', compact('users'));
     }
 
     public function create(){
         $posts = Post::all();
-        $otdels = Otdel::all();
-        return view('user.create', compact('posts', 'otdels'));
+        $departments = Department::all();
+        return view('user.create', compact('posts', 'departments'));
     }
 
 
-    public function store(){
-
-
-        $data = request()->validate([
+    public function store(Request $request){
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'post_id' => ['required'],
@@ -58,22 +45,22 @@ class UserController extends BaseController
         $password = $data['password'];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $data_otdels = request()->validate([
-            'otdel_id' => ''
+        $data_departments = request()->validate([
+            'department_id' => ''
         ]);
 
         $new_user = User::create(
             [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'post_id' => $data['post_id'],
-            'password' => $hashed_password,
-            'image' => $newImageName,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'post_id' => $data['post_id'],
+                'password' => $hashed_password,
+                'image' => $newImageName
             ]
         );
 
-        User::find($new_user->id)->otdels()->attach($data_otdels['otdel_id']);
-       return redirect()->route('user.index');
+        User::find($new_user->id)->departments()->attach($data_departments['department_id']);
+       return redirect()->route('users.index');
     }
 
     public function show(User $user){
@@ -83,12 +70,12 @@ class UserController extends BaseController
 
     public function edit(User $user){
         $posts = Post::all();
-        $otdels = Otdel::all();
-        return view('user.edit', compact('posts', 'user', 'otdels'));
+        $departments = Department::all();
+        return view('user.edit', compact('posts', 'user', 'departments'));
     }
 
-    public function update(User $user){
-        $data = request()->validate([
+    public function update(Request $request, User $user){
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'post_id' => ['required', 'integer'],
@@ -116,19 +103,19 @@ class UserController extends BaseController
         }
         
 
-        $data_otdels = request()->validate([
-            'otdel_id' => ''
+        $data_departments = $request->validate([
+            'department_id' => ''
         ]);
         
         
-        User::find($user->id)->otdels()->sync($data_otdels['otdel_id']);
+        User::find($user->id)->departments()->sync($data_departments['department_id']);
 
-        return redirect()->route('user.show', $user->id);
+        return redirect()->route('users.show', $user->id);
     }
 
     public function destroy(User $user) {
         $user->delete();
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
 }

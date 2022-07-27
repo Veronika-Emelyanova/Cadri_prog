@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 use App\Models\Post;
-use App\Models\Otdel;
+use App\Models\Department;
+use App\Traits\HasRolesAndPermissions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -28,12 +30,13 @@ class User extends Authenticatable
     ];
 
     public function post(){
-        return $this->belongsTo(Post::class, 'post_id', 'id');
+        return $this->belongsTo(Post::class);
     }
 
-    public function otdels(){
-        return $this->belongsToMany(Otdel::class, 'user_otdels', 'user_id', 'otdel_id');
+    public function departments(){
+        return $this->belongsToMany(Department::class, 'user_departments', 'user_id', 'department_id');
     }
+
     /**
      * The attributes that should be hidden for serialization.
      *
