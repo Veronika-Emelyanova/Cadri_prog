@@ -25,9 +25,6 @@ User может только просматривать данные о поль
 ### Страница "пользователи":
 ![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/users.png)
 
-### Страница "пользователи":
-![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/users.png)
-
 ### Страница "Создание пользователя":
 ![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/create.png)
 
@@ -40,6 +37,8 @@ User может только просматривать данные о поль
 ### Страница "должности":
 ![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/Posts.png)
 
+### Страница "отделы":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/departments.png)
 
 
 
