@@ -1,4 +1,4 @@
-# <p align="center">Система учёта кадров</p>#
+# <p align="center">Система учёта кадров</p>
 ---
 
 ## О программе 
@@ -22,4 +22,26 @@ Admin может осуществлять все функции, такие ка
 Manader облададает теми же правами, но не может удалять пользователей.
 User может только просматривать данные о пользователях, отделах и должностях.
 
-## 
+### Страница "пользователи":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/users.png)
+
+### Страница "пользователи":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/users.png)
+
+### Страница "Создание пользователя":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/create.png)
+
+### Страница "Просмотр пользователя":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/show.png)
+
+### Страница "Изменение данных о пользователе":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/update.png)
+
+### Страница "должности":
+![Image text](https://github.com/Veronika-Emelyanova/Cadri_prog/blob/main/resources/Images/Posts.png)
+
+
+
+
+Автор: Емельянова Вероника Сергеевна
+г.Тамбов 2022 год
