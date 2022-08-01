@@ -43,13 +43,31 @@
                                 <label for="post_id" class="col-md-4 col-form-label text-md-end">{{ __('Должность') }}</label>
 
                                 <div class="col-md-6">
-{{--                                    <input id="post" type="text" class="form-control @error('post') is-invalid @enderror" name="post_id" value="{{ old('post_id') }}" required autocomplete="post_id" autofocus>--}}
+                                    {{--<input id="post" type="text" class="form-control @error('post') is-invalid @enderror" name="post_id" value="{{ old('post_id') }}" required autocomplete="post_id" autofocus>--}}
                                     <select class="form-control @error('post') is-invalid @enderror" id="post_id" name="post_id" value="{{ old('post_id') }}" required autocomplete="post_id" autofocus>
                                         @foreach($posts as $post)
                                             <option value="{{$post->id}}">{{$post->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('post')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Роль') }}</label>
+
+                                <div class="col-md-6">
+{{--                                    <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id" autofocus>--}}
+                                    <select class="form-control @error('role') is-invalid @enderror" id="role_id" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id" autofocus>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

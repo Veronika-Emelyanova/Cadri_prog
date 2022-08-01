@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Carbon\Carbon;
-use App\Models\Post;
+use App\Models\Role;
 use App\Models\Department;
 use App\Traits\HasRolesAndPermissions;
 
@@ -34,7 +34,11 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany(Department::class, 'user_departments', 'user_id', 'department_id');
+        return $this->belongsToMany(Department::class, 'users_departments', 'user_id', 'department_id');
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
 
     /**

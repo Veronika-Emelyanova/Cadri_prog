@@ -30,18 +30,15 @@
                         @role('user')
                              <td><b>{{$user->name}}</b></td> 
                         @endrole
-
+                        
                         <th>{{$user->post->name}}</th>
+
                         <div>
-                            @if($user->departments)
-                                <th>
+                            <th>
                             @foreach($user->departments as $department)
                                     {{$department->id}}. {{$department->name}}<br>
                             @endforeach
-                            </th>
-                            @else
-                                <th>Добавьте отдел(ы)</th>
-                            @endif
+                            </th>  
                         </div>
                         <th>{{$user->email}}</th>
                     </tr>

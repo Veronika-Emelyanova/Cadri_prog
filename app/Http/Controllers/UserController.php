@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User;
+use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -26,7 +27,8 @@ class UserController extends Controller
     public function create(){
         $posts = Post::all();
         $departments = Department::all();
-        return view('user.create', compact('posts', 'departments'));
+        $roles = Role::all();
+        return view('user.create', compact('posts', 'departments', 'roles'));
     }
 
 
@@ -49,6 +51,10 @@ class UserController extends Controller
             'department_id' => ''
         ]);
 
+        $data_roles = request()->validate([
+            'role_id' => ''
+        ]);
+
         $new_user = User::create(
             [
                 'name' => $data['name'],
@@ -60,6 +66,7 @@ class UserController extends Controller
         );
 
         User::find($new_user->id)->departments()->attach($data_departments['department_id']);
+        User::find($new_user->id)->roles()->attach($data_roles['role_id']);
        return redirect()->route('users.index');
     }
 
@@ -71,7 +78,8 @@ class UserController extends Controller
     public function edit(User $user){
         $posts = Post::all();
         $departments = Department::all();
-        return view('user.edit', compact('posts', 'user', 'departments'));
+        $roles = Role::all();
+        return view('user.edit', compact('posts', 'user', 'departments', 'roles'));
     }
 
     public function update(Request $request, User $user){
@@ -107,8 +115,12 @@ class UserController extends Controller
             'department_id' => ''
         ]);
         
-        
+        $data_roles = request()->validate([
+            'role_id' => ''
+        ]);
+
         User::find($user->id)->departments()->sync($data_departments['department_id']);
+        User::find($user->id)->roles()->attach($data_roles['role_id']);
 
         return redirect()->route('users.show', $user->id);
     }

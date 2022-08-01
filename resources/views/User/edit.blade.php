@@ -17,6 +17,14 @@
                 </select>
             </div>
             <div class="col-md-6">
+                <label for="role">{{ __('Роль') }}</label>
+                <select class="form-select mb-3" id="role" name="role_id" >
+                    @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
                 <label for="department_id">{{ __('Отдел(ы)') }}</label>
                 <select class="form-select mb-3" id="department_id" name="department_id[]" multiple aria-label="multiple select example">
                     @foreach($departments as $department)

@@ -19,6 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+   img {
+    border: none; /* Убираем рамку */
+   }
+  </style>
 </head>
 <body>
     <div id="app">
@@ -67,6 +72,7 @@
                                 <img src="{{ asset('images/' . Auth::user()->image)}}"
                                      width="50"
                                      height="50"
+                                     
                                      alt=""
                                      class="rounded-circle"
                                 >
