@@ -34,11 +34,11 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany(Department::class, 'users_departments', 'user_id', 'department_id');
+        return $this->belongsToMany(Department::class);
     }
 
     public function roles(){
-        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
